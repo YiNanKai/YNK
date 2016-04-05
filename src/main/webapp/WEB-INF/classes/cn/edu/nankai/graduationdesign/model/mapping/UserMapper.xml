@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nankai.graduationdesign.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nankai.graduationdesign.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_age" property="userAge" jdbcType="TIMESTAMP" />
+    <result column="user_sex" property="userSex" jdbcType="BIT" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_student_id" property="userStudentId" jdbcType="VARCHAR" />
+    <result column="user_ip" property="userIp" jdbcType="VARCHAR" />
+    <result column="user_last_login_time" property="userLastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_level" property="userLevel" jdbcType="INTEGER" />
+    <result column="user_register_time" property="userRegisterTime" jdbcType="TIMESTAMP" />
+    <result column="user_is_in_use" property="userIsInUse" jdbcType="BIT" />
+    <result column="user_college" property="userCollege" jdbcType="VARCHAR" />
+    <result column="user_race" property="userRace" jdbcType="VARCHAR" />
+    <result column="user_score" property="userScore" jdbcType="INTEGER" />
+    <result column="user_signature" property="userSignature" jdbcType="VARCHAR" />
+    <result column="user_portrait_link" property="userPortraitLink" jdbcType="VARCHAR" />
+    <result column="user_other" property="userOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_age, user_sex, user_email, user_phone, user_student_id, 
+    user_ip, user_last_login_time, user_address, user_level, user_register_time, user_is_in_use, 
+    user_college, user_race, user_score, user_signature, user_portrait_link, user_other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nankai.graduationdesign.model.User" >
+    insert into user (user_id, user_name, user_age, 
+      user_sex, user_email, user_phone, 
+      user_student_id, user_ip, user_last_login_time, 
+      user_address, user_level, user_register_time, 
+      user_is_in_use, user_college, user_race, 
+      user_score, user_signature, user_portrait_link, user_other
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userAge,jdbcType=INTEGER}, 
+      #{userSex,jdbcType=BIT}, #{userEmail,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userStudentId,jdbcType=VARCHAR}, #{userIp,jdbcType=VARCHAR}, #{userLastLoginTime,jdbcType=TIMESTAMP}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userLevel,jdbcType=INTEGER}, #{userRegisterTime,jdbcType=TIMESTAMP}, 
+      #{userIsInUse,jdbcType=BIT}, #{userCollege,jdbcType=VARCHAR}, #{userRace,jdbcType=VARCHAR}, 
+      #{userScore,jdbcType=INTEGER}, #{userSignature,jdbcType=VARCHAR},#{userPortraitLink,jdbcType=VARCHAR}, #{userOther,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nankai.graduationdesign.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userAge != null" >
+        user_age,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userStudentId != null" >
+        user_student_id,
+      </if>
+      <if test="userIp != null" >
+        user_ip,
+      </if>
+      <if test="userLastLoginTime != null" >
+        user_last_login_time,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userLevel != null" >
+        user_level,
+      </if>
+      <if test="userRegisterTime != null" >
+        user_register_time,
+      </if>
+      <if test="userIsInUse != null" >
+        user_is_in_use,
+      </if>
+      <if test="userCollege != null" >
+        user_college,
+      </if>
+      <if test="userRace != null" >
+        user_race,
+      </if>
+      <if test="userScore != null" >
+        user_score,
+      </if>
+      <if test="userSignature != null" >
+        user_signature,
+      </if>
+      <if test="userPortraitLink != null" >
+        user_portrait_link,
+      </if>
+      <if test="userOther != null" >
+        user_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        #{userAge,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStudentId != null" >
+        #{userStudentId,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null" >
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLastLoginTime != null" >
+        #{userLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userRegisterTime != null" >
+        #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIsInUse != null" >
+        #{userIsInUse,jdbcType=BIT},
+      </if>
+      <if test="userCollege != null" >
+        #{userCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="userRace != null" >
+        #{userRace,jdbcType=VARCHAR},
+      </if>
+      <if test="userScore != null" >
+        #{userScore,jdbcType=INTEGER},
+      </if>
+      <if test="userSignature != null" >
+        #{userSignature,jdbcType=VARCHAR},
+      </if>
+       <if test="userPortraitLink != null" >
+        #{userPortraitLink,jdbcType=VARCHAR},
+      </if>
+      <if test="userOther != null" >
+        #{userOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nankai.graduationdesign.model.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null" >
+        user_age = #{userAge,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=BIT},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userStudentId != null" >
+        user_student_id = #{userStudentId,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null" >
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userLastLoginTime != null" >
+        user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userRegisterTime != null" >
+        user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userIsInUse != null" >
+        user_is_in_use = #{userIsInUse,jdbcType=BIT},
+      </if>
+      <if test="userCollege != null" >
+        user_college = #{userCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="userRace != null" >
+        user_race = #{userRace,jdbcType=VARCHAR},
+      </if>
+      <if test="userScore != null" >
+        user_score = #{userScore,jdbcType=INTEGER},
+      </if>
+      <if test="userSignature != null" >
+        user_signature = #{userSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="userPortraitLink != null" >
+        user_portrait_link = #{userPortraitLink,jdbcType=VARCHAR},
+      </if>
+      <if test="userOther != null" >
+        user_other = #{userOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nankai.graduationdesign.model.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=TIMESTAMP},
+      user_sex = #{userSex,jdbcType=BIT},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_student_id = #{userStudentId,jdbcType=VARCHAR},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      user_last_login_time = #{userLastLoginTime,jdbcType=TIMESTAMP},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      user_register_time = #{userRegisterTime,jdbcType=TIMESTAMP},
+      user_is_in_use = #{userIsInUse,jdbcType=BIT},
+      user_college = #{userCollege,jdbcType=VARCHAR},
+      user_race = #{userRace,jdbcType=VARCHAR},
+      user_score = #{userScore,jdbcType=INTEGER},
+      user_signature = #{userSignature,jdbcType=VARCHAR},
+      user_portrait_link = #{userPortraitLink,jdbcType=VARCHAR},
+      user_other = #{userOther,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

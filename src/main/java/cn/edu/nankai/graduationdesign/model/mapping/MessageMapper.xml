@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nankai.graduationdesign.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nankai.graduationdesign.model.Message" >
+    <id column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="message_datetime" property="messageDatetime" jdbcType="TIMESTAMP" />
+    <result column="message_target_user" property="messageTargetUser" jdbcType="VARCHAR" />
+    <result column="message_source_commodity" property="messageSourceCommodity" jdbcType="VARCHAR" />
+    <result column="message_target_commodity" property="messageTargetCommodity" jdbcType="VARCHAR" />
+    <result column="message_other" property="messageOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_id, user_id, message_datetime, message_target_user, message_source_commodity, 
+    message_target_commodity, message_other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nankai.graduationdesign.model.Message" >
+    insert into message (message_id, user_id, message_datetime, 
+      message_target_user, message_source_commodity, 
+      message_target_commodity, message_other)
+    values (#{messageId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{messageDatetime,jdbcType=TIMESTAMP}, 
+      #{messageTargetUser,jdbcType=VARCHAR}, #{messageSourceCommodity,jdbcType=VARCHAR}, 
+      #{messageTargetCommodity,jdbcType=VARCHAR}, #{messageOther,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nankai.graduationdesign.model.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="messageDatetime != null" >
+        message_datetime,
+      </if>
+      <if test="messageTargetUser != null" >
+        message_target_user,
+      </if>
+      <if test="messageSourceCommodity != null" >
+        message_source_commodity,
+      </if>
+      <if test="messageTargetCommodity != null" >
+        message_target_commodity,
+      </if>
+      <if test="messageOther != null" >
+        message_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="messageDatetime != null" >
+        #{messageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageTargetUser != null" >
+        #{messageTargetUser,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSourceCommodity != null" >
+        #{messageSourceCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTargetCommodity != null" >
+        #{messageTargetCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageOther != null" >
+        #{messageOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nankai.graduationdesign.model.Message" >
+    update message
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="messageDatetime != null" >
+        message_datetime = #{messageDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageTargetUser != null" >
+        message_target_user = #{messageTargetUser,jdbcType=VARCHAR},
+      </if>
+      <if test="messageSourceCommodity != null" >
+        message_source_commodity = #{messageSourceCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTargetCommodity != null" >
+        message_target_commodity = #{messageTargetCommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="messageOther != null" >
+        message_other = #{messageOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nankai.graduationdesign.model.Message" >
+    update message
+    set user_id = #{userId,jdbcType=INTEGER},
+      message_datetime = #{messageDatetime,jdbcType=TIMESTAMP},
+      message_target_user = #{messageTargetUser,jdbcType=VARCHAR},
+      message_source_commodity = #{messageSourceCommodity,jdbcType=VARCHAR},
+      message_target_commodity = #{messageTargetCommodity,jdbcType=VARCHAR},
+      message_other = #{messageOther,jdbcType=VARCHAR}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

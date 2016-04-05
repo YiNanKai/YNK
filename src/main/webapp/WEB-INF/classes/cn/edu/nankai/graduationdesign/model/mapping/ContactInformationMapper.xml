@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nankai.graduationdesign.dao.ContactInformationMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nankai.graduationdesign.model.ContactInformation" >
+    <id column="contact_information_id" property="contactInformationId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="contact_information_name" property="contactInformationName" jdbcType="VARCHAR" />
+    <result column="contact_information_content" property="contactInformationContent" jdbcType="VARCHAR" />
+    <result column="contact_information_other" property="contactInformationOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    contact_information_id, user_id, contact_information_name, contact_information_content, 
+    contact_information_other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from contact_information
+    where contact_information_id = #{contactInformationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from contact_information
+    where contact_information_id = #{contactInformationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nankai.graduationdesign.model.ContactInformation" >
+    insert into contact_information (contact_information_id, user_id, contact_information_name, 
+      contact_information_content, contact_information_other
+      )
+    values (#{contactInformationId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{contactInformationName,jdbcType=VARCHAR}, 
+      #{contactInformationContent,jdbcType=VARCHAR}, #{contactInformationOther,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nankai.graduationdesign.model.ContactInformation" >
+    insert into contact_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contactInformationId != null" >
+        contact_information_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="contactInformationName != null" >
+        contact_information_name,
+      </if>
+      <if test="contactInformationContent != null" >
+        contact_information_content,
+      </if>
+      <if test="contactInformationOther != null" >
+        contact_information_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contactInformationId != null" >
+        #{contactInformationId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="contactInformationName != null" >
+        #{contactInformationName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformationContent != null" >
+        #{contactInformationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformationOther != null" >
+        #{contactInformationOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nankai.graduationdesign.model.ContactInformation" >
+    update contact_information
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="contactInformationName != null" >
+        contact_information_name = #{contactInformationName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformationContent != null" >
+        contact_information_content = #{contactInformationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformationOther != null" >
+        contact_information_other = #{contactInformationOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contact_information_id = #{contactInformationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nankai.graduationdesign.model.ContactInformation" >
+    update contact_information
+    set user_id = #{userId,jdbcType=INTEGER},
+      contact_information_name = #{contactInformationName,jdbcType=VARCHAR},
+      contact_information_content = #{contactInformationContent,jdbcType=VARCHAR},
+      contact_information_other = #{contactInformationOther,jdbcType=VARCHAR}
+    where contact_information_id = #{contactInformationId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nankai.graduationdesign.dao.CommodityMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nankai.graduationdesign.model.Commodity" >
+    <id column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_price" property="commodityPrice" jdbcType="INTEGER" />
+    <result column="commodity_used_time" property="commodityUsedTime" jdbcType="INTEGER" />
+    <result column="commodity_type" property="commodityType" jdbcType="VARCHAR" />
+    <result column="commodity_category" property="commodityCategory" jdbcType="VARCHAR" />
+    <result column="commodity_want_change_type" property="commodityWantChangeType" jdbcType="VARCHAR" />
+    <result column="commodity_want_change_category" property="commodityWantChangeCategory" jdbcType="VARCHAR" />
+    <result column="commodity_picture_link" property="commodityPictureLink" jdbcType="VARCHAR" />
+    <result column="commodity_count" property="commodityCount" jdbcType="INTEGER" />
+    <result column="commodity_is_exchange" property="commodityIsExchange" jdbcType="BIT" />
+    <result column="commodity_publish_date" property="commodityPublishDate" jdbcType="DATE" />
+    <result column="commodity_information" property="commodityInformation" jdbcType="VARCHAR" />
+    <result column="commodity_page_view" property="commodityPageView" jdbcType="INTEGER" />
+    <result column="commodity_exchanged_list" property="commodityExchangedList" jdbcType="VARCHAR" />
+    <result column="commodity_other" property="commodityOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commodity_id, user_id, commodity_name, commodity_price, commodity_used_time, commodity_type, 
+    commodity_category, commodity_want_change_type, commodity_want_change_category, commodity_picture_link, 
+    commodity_count, commodity_is_exchange, commodity_publish_date, commodity_information, 
+    commodity_page_view, commodity_exchanged_list, commodity_other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByCommodityName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodity_name = #{commodityName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectListByCommodityName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodity_name like #{commodityLikeName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectListCountByCommodityName" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select count(*)
+    from commodity
+    where commodity_name like #{commodityLikeName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectListSortByCommodityPageView" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> 
+    FROM commodity 
+    ORDER BY commodity_page_view DESC Limit 0,3
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from commodity
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nankai.graduationdesign.model.Commodity" >
+    insert into commodity (commodity_id, user_id, commodity_name, 
+      commodity_price, commodity_used_time, commodity_type, 
+      commodity_category, commodity_want_change_type, 
+      commodity_want_change_category, commodity_picture_link, 
+      commodity_count, commodity_is_exchange, commodity_publish_date, 
+      commodity_information, commodity_page_view, 
+      commodity_exchanged_list, commodity_other)
+    values (#{commodityId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityPrice,jdbcType=INTEGER}, #{commodityUsedTime,jdbcType=INTEGER}, #{commodityType,jdbcType=VARCHAR}, 
+      #{commodityCategory,jdbcType=VARCHAR}, #{commodityWantChangeType,jdbcType=VARCHAR}, 
+      #{commodityWantChangeCategory,jdbcType=VARCHAR}, #{commodityPictureLink,jdbcType=VARCHAR}, 
+      #{commodityCount,jdbcType=INTEGER}, #{commodityIsExchange,jdbcType=BIT}, #{commodityPublishDate,jdbcType=DATE}, 
+      #{commodityInformation,jdbcType=VARCHAR}, #{commodityPageView,jdbcType=INTEGER}, 
+      #{commodityExchangedList,jdbcType=VARCHAR}, #{commodityOther,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nankai.graduationdesign.model.Commodity" >
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="commodityName != null" >
+        commodity_name,
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price,
+      </if>
+      <if test="commodityUsedTime != null" >
+        commodity_used_time,
+      </if>
+      <if test="commodityType != null" >
+        commodity_type,
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category,
+      </if>
+      <if test="commodityWantChangeType != null" >
+        commodity_want_change_type,
+      </if>
+      <if test="commodityWantChangeCategory != null" >
+        commodity_want_change_category,
+      </if>
+      <if test="commodityPictureLink != null" >
+        commodity_picture_link,
+      </if>
+      <if test="commodityCount != null" >
+        commodity_count,
+      </if>
+      <if test="commodityIsExchange != null" >
+        commodity_is_exchange,
+      </if>
+      <if test="commodityPublishDate != null" >
+        commodity_publish_date,
+      </if>
+      <if test="commodityInformation != null" >
+        commodity_information,
+      </if>
+      <if test="commodityPageView != null" >
+        commodity_page_view,
+      </if>
+      <if test="commodityExchangedList != null" >
+        commodity_exchanged_list,
+      </if>
+      <if test="commodityOther != null" >
+        commodity_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        #{commodityPrice,jdbcType=INTEGER},
+      </if>
+      <if test="commodityUsedTime != null" >
+        #{commodityUsedTime,jdbcType=INTEGER},
+      </if>
+      <if test="commodityType != null" >
+        #{commodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        #{commodityCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityWantChangeType != null" >
+        #{commodityWantChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityWantChangeCategory != null" >
+        #{commodityWantChangeCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPictureLink != null" >
+        #{commodityPictureLink,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCount != null" >
+        #{commodityCount,jdbcType=INTEGER},
+      </if>
+      <if test="commodityIsExchange != null" >
+        #{commodityIsExchange,jdbcType=BIT},
+      </if>
+      <if test="commodityPublishDate != null" >
+        #{commodityPublishDate,jdbcType=DATE},
+      </if>
+      <if test="commodityInformation != null" >
+        #{commodityInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="commdityPageView != null" >
+        #{commodityPageView,jdbcType=INTEGER},
+      </if>
+      <if test="commodityExchangedList != null" >
+        #{commodityExchangedList,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOther != null" >
+        #{commodityOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nankai.graduationdesign.model.Commodity" >
+    update commodity
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPrice != null" >
+        commodity_price = #{commodityPrice,jdbcType=INTEGER},
+      </if>
+      <if test="commodityUsedTime != null" >
+        commodity_used_time = #{commodityUsedTime,jdbcType=INTEGER},
+      </if>
+      <if test="commodityType != null" >
+        commodity_type = #{commodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCategory != null" >
+        commodity_category = #{commodityCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityWantChangeType != null" >
+        commodity_want_change_type = #{commodityWantChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityWantChangeCategory != null" >
+        commodity_want_change_category = #{commodityWantChangeCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPictureLink != null" >
+        commodity_picture_link = #{commodityPictureLink,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCount != null" >
+        commodity_count = #{commodityCount,jdbcType=INTEGER},
+      </if>
+      <if test="commodityIsExchange != null" >
+        commodity_is_exchange = #{commodityIsExchange,jdbcType=BIT},
+      </if>
+      <if test="commodityPublishDate != null" >
+        commodity_publish_date = #{commodityPublishDate,jdbcType=DATE},
+      </if>
+      <if test="commodityInformation != null" >
+        commodity_information = #{commodityInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="commdityPageView != null" >
+        commodity_page_view = #{commodityPageView,jdbcType=INTEGER},
+      </if>
+      <if test="commodityExchangedList != null" >
+        commodity_exchanged_list = #{commodityExchangedList,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityOther != null" >
+        commodity_other = #{commodityOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nankai.graduationdesign.model.Commodity" >
+    update commodity
+    set user_id = #{userId,jdbcType=INTEGER},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_price = #{commodityPrice,jdbcType=INTEGER},
+      commodity_used_time = #{commodityUsedTime,jdbcType=INTEGER},
+      commodity_type = #{commodityType,jdbcType=VARCHAR},
+      commodity_category = #{commodityCategory,jdbcType=VARCHAR},
+      commodity_want_change_type = #{commodityWantChangeType,jdbcType=VARCHAR},
+      commodity_want_change_category = #{commodityWantChangeCategory,jdbcType=VARCHAR},
+      commodity_picture_link = #{commodityPictureLink,jdbcType=VARCHAR},
+      commodity_count = #{commodityCount,jdbcType=INTEGER},
+      commodity_is_exchange = #{commodityIsExchange,jdbcType=BIT},
+      commodity_publish_date = #{commodityPublishDate,jdbcType=DATE},
+      commodity_information = #{commodityInformation,jdbcType=VARCHAR},
+      commodity_page_view = #{commodityPageView,jdbcType=INTEGER},
+      commodity_exchanged_list = #{commodityExchangedList,jdbcType=VARCHAR},
+      commodity_other = #{commodityOther,jdbcType=VARCHAR}
+    where commodity_id = #{commodityId,jdbcType=INTEGER}
+  </update>
+</mapper>

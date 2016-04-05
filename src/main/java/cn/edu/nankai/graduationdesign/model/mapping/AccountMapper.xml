@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nankai.graduationdesign.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nankai.graduationdesign.model.Account" >
+    <id column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="account_login_name" property="accountLoginName" jdbcType="VARCHAR" />
+    <result column="account_password" property="accountPassword" jdbcType="VARCHAR" />
+    <result column="account_other" property="accountOther" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_id, user_id, account_login_name, account_password, account_other
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from account
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nankai.graduationdesign.model.Account" >
+    insert into account (account_id, user_id, account_login_name, 
+      account_password, account_other)
+    values (#{accountId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{accountLoginName,jdbcType=VARCHAR}, 
+      #{accountPassword,jdbcType=VARCHAR}, #{accountOther,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nankai.graduationdesign.model.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="accountLoginName != null" >
+        account_login_name,
+      </if>
+      <if test="accountPassword != null" >
+        account_password,
+      </if>
+      <if test="accountOther != null" >
+        account_other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountLoginName != null" >
+        #{accountLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountOther != null" >
+        #{accountOther,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nankai.graduationdesign.model.Account" >
+    update account
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountLoginName != null" >
+        account_login_name = #{accountLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null" >
+        account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountOther != null" >
+        account_other = #{accountOther,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nankai.graduationdesign.model.Account" >
+    update account
+    set user_id = #{userId,jdbcType=INTEGER},
+      account_login_name = #{accountLoginName,jdbcType=VARCHAR},
+      account_password = #{accountPassword,jdbcType=VARCHAR},
+      account_other = #{accountOther,jdbcType=VARCHAR}
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+</mapper>
